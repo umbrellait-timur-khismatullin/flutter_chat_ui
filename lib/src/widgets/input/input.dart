@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
@@ -16,6 +18,7 @@ import 'send_button.dart';
 class Input extends StatefulWidget {
   /// Creates [Input] widget.
   const Input({
+    this.attachments,
     super.key,
     this.isAttachmentUploading,
     this.onAttachmentPressed,
@@ -38,6 +41,8 @@ class Input extends StatefulWidget {
 
   /// Customisation options for the [Input].
   final InputOptions options;
+
+  final List<File>? attachments;
 
   @override
   State<Input> createState() => _InputState();
@@ -161,78 +166,75 @@ class _InputState extends State<Input> {
       autofocus: true,
       child: Padding(
         padding: InheritedChatTheme.of(context).theme.inputMargin,
-        child: Material(
-          borderRadius: InheritedChatTheme.of(context).theme.inputBorderRadius,
-          color: InheritedChatTheme.of(context).theme.inputBackgroundColor,
-          child: Container(
-            decoration:
-                InheritedChatTheme.of(context).theme.inputContainerDecoration,
-            padding: safeAreaInsets,
-            child: Row(
-              textDirection: TextDirection.ltr,
-              children: [
-                if (widget.onAttachmentPressed != null)
-                  AttachmentButton(
-                    isLoading: widget.isAttachmentUploading ?? false,
-                    onPressed: widget.onAttachmentPressed,
+        child: Container(
+          decoration:
+              InheritedChatTheme.of(context).theme.inputContainerDecoration,
+          // padding: safeAreaInsets,
+          child: Row(
+            textDirection: TextDirection.ltr,
+            children: [
+              if (widget.onAttachmentPressed != null)
+                AttachmentButton(
+                  count: widget.attachments?.length ?? 0,
+                  isLoading: widget.isAttachmentUploading ?? false,
+                  onPressed: widget.onAttachmentPressed,
+                  padding: buttonPadding,
+                ),
+              Expanded(
+                child: Padding(
+                  padding: textPadding,
+                  child: TextField(
+                    controller: _textController,
+                    cursorColor: InheritedChatTheme.of(context)
+                        .theme
+                        .inputTextCursorColor,
+                    decoration: InheritedChatTheme.of(context)
+                        .theme
+                        .inputTextDecoration
+                        .copyWith(
+                          hintStyle: InheritedChatTheme.of(context)
+                              .theme
+                              .inputTextStyle
+                              .copyWith(
+                                color: InheritedChatTheme.of(context)
+                                    .theme
+                                    .inputTextColor
+                                    .withOpacity(0.5),
+                              ),
+                          hintText:
+                              InheritedL10n.of(context).l10n.inputPlaceholder,
+                        ),
+                    focusNode: _inputFocusNode,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 5,
+                    minLines: 1,
+                    onChanged: widget.options.onTextChanged,
+                    onTap: widget.options.onTextFieldTap,
+                    style: InheritedChatTheme.of(context)
+                        .theme
+                        .inputTextStyle
+                        .copyWith(
+                          color: InheritedChatTheme.of(context)
+                              .theme
+                              .inputTextColor,
+                        ),
+                    textCapitalization: TextCapitalization.sentences,
+                  ),
+                ),
+              ),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: buttonPadding.bottom + buttonPadding.top + 24,
+                ),
+                child: Visibility(
+                  visible: _sendButtonVisible,
+                  child: SendButton(
+                    onPressed: _handleSendPressed,
                     padding: buttonPadding,
                   ),
-                Expanded(
-                  child: Padding(
-                    padding: textPadding,
-                    child: TextField(
-                      controller: _textController,
-                      cursorColor: InheritedChatTheme.of(context)
-                          .theme
-                          .inputTextCursorColor,
-                      decoration: InheritedChatTheme.of(context)
-                          .theme
-                          .inputTextDecoration
-                          .copyWith(
-                            hintStyle: InheritedChatTheme.of(context)
-                                .theme
-                                .inputTextStyle
-                                .copyWith(
-                                  color: InheritedChatTheme.of(context)
-                                      .theme
-                                      .inputTextColor
-                                      .withOpacity(0.5),
-                                ),
-                            hintText:
-                                InheritedL10n.of(context).l10n.inputPlaceholder,
-                          ),
-                      focusNode: _inputFocusNode,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 5,
-                      minLines: 1,
-                      onChanged: widget.options.onTextChanged,
-                      onTap: widget.options.onTextFieldTap,
-                      style: InheritedChatTheme.of(context)
-                          .theme
-                          .inputTextStyle
-                          .copyWith(
-                            color: InheritedChatTheme.of(context)
-                                .theme
-                                .inputTextColor,
-                          ),
-                      textCapitalization: TextCapitalization.sentences,
-                    ),
-                  ),
                 ),
-                ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: buttonPadding.bottom + buttonPadding.top + 24,
-                  ),
-                  child: Visibility(
-                    visible: _sendButtonVisible,
-                    child: SendButton(
-                      onPressed: _handleSendPressed,
-                      padding: buttonPadding,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

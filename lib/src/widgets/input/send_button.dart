@@ -22,21 +22,29 @@ class SendButton extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         margin: InheritedChatTheme.of(context).theme.sendButtonMargin ??
             const EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
-        child: IconButton(
-          constraints: const BoxConstraints(
-            minHeight: 24,
-            minWidth: 24,
+        child: Container(
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: InheritedChatTheme.of(context).theme.sendBackgroundColor,
           ),
-          icon: InheritedChatTheme.of(context).theme.sendButtonIcon ??
-              Image.asset(
-                'assets/icon-send.png',
-                color: InheritedChatTheme.of(context).theme.inputTextColor,
-                package: 'flutter_chat_ui',
-              ),
-          onPressed: onPressed,
-          padding: padding,
-          splashRadius: 24,
-          tooltip: InheritedL10n.of(context).l10n.sendButtonAccessibilityLabel,
+          child: IconButton(
+            // constraints: const BoxConstraints(
+            //   minHeight: 24,
+            //   minWidth: 24,
+            // ),
+            icon: InheritedChatTheme.of(context).theme.sendButtonIcon ??
+                Image.asset(
+                  'assets/icon-send.png',
+                  color: InheritedChatTheme.of(context).theme.inputTextColor,
+                  package: 'flutter_chat_ui',
+                ),
+            onPressed: onPressed,
+            padding: padding,
+            splashRadius: 24,
+            tooltip: InheritedL10n.of(context).l10n.sendButtonAccessibilityLabel,
+          ),
         ),
       );
 }

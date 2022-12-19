@@ -155,7 +155,7 @@ class ChatL10nRu extends ChatL10n {
     super.attachmentButtonAccessibilityLabel = 'Отправить медиа',
     super.emptyChatPlaceholder = 'Пока что у вас нет сообщений',
     super.fileButtonAccessibilityLabel = 'Файл',
-    super.inputPlaceholder = 'Сообщение',
+    super.inputPlaceholder = 'Введите сообщение',
     super.sendButtonAccessibilityLabel = 'Отправить',
     super.unreadMessagesLabel = 'Непрочитанные сообщения',
   });

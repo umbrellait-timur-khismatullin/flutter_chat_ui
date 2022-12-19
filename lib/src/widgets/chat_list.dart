@@ -179,17 +179,18 @@ class _ChatListState extends State<ChatList>
             SliverPadding(
               padding: const EdgeInsets.only(bottom: 4),
               sliver: PatchedSliverAnimatedList(
-                findChildIndexCallback: (Key key) {
-                  if (key is ValueKey<Object>) {
-                    final newIndex = widget.items.indexWhere(
-                      (v) => _valueKeyForItem(v) == key,
-                    );
-                    if (newIndex != -1) {
-                      return newIndex;
-                    }
-                  }
-                  return null;
-                },
+                // TODO(Khismatullin): fix the logic.
+                // findChildIndexCallback: (Key key) {
+                //   if (key is ValueKey<Object>) {
+                //     final newIndex = widget.items.indexWhere(
+                //       (v) => _valueKeyForItem(v) == key,
+                //     );
+                //     if (newIndex != -1) {
+                //       return newIndex;
+                //     }
+                //   }
+                //   return null;
+                // },
                 initialItemCount: widget.items.length,
                 key: _listKey,
                 itemBuilder: (_, index, animation) =>

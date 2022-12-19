@@ -56,6 +56,11 @@ const secondaryDark = Color(0xff2b2250);
 abstract class ChatTheme {
   /// Creates a new chat theme based on provided colors and text styles.
   const ChatTheme({
+    required this.borderColor,
+    required this.attachmentBadgeColor,
+    required this.dateTimeTextStyle,
+    required this.inputHintTextStyle,
+    required this.sendBackgroundColor,
     required this.attachmentButtonIcon,
     required this.attachmentButtonMargin,
     required this.backgroundColor,
@@ -291,6 +296,16 @@ abstract class ChatTheme {
 
   /// User names text style. Color will be overwritten with [userAvatarNameColors].
   final TextStyle userNameTextStyle;
+
+  final Color borderColor;
+
+  final Color attachmentBadgeColor;
+
+  final Color sendBackgroundColor;
+
+  final TextStyle dateTimeTextStyle;
+
+  final TextStyle inputHintTextStyle;
 }
 
 /// Default chat theme which extends [ChatTheme].
@@ -300,6 +315,21 @@ class DefaultChatTheme extends ChatTheme {
   /// override only a couple of properties, otherwise create a new class
   /// which extends [ChatTheme]
   const DefaultChatTheme({
+    super.borderColor = primary,
+    super.attachmentBadgeColor = primary,
+    super.sendBackgroundColor = Colors.transparent,
+    super.dateTimeTextStyle = const TextStyle(
+      color: neutral2,
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      height: 1.333,
+    ),
+    super.inputHintTextStyle = const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+      color: neutral7WithOpacity,
+    ),
     super.attachmentButtonIcon,
     super.attachmentButtonMargin,
     super.backgroundColor = neutral7,
@@ -469,6 +499,21 @@ class DarkChatTheme extends ChatTheme {
   /// override only a couple of properties, otherwise create a new class
   /// which extends [ChatTheme]
   const DarkChatTheme({
+    super.borderColor = primary,
+    super.attachmentBadgeColor = primary,
+    super.sendBackgroundColor = Colors.transparent,
+    super.dateTimeTextStyle = const TextStyle(
+      color: neutral2,
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      height: 1.333,
+    ),
+    super.inputHintTextStyle = const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+      color: neutral7WithOpacity,
+    ),
     super.attachmentButtonIcon,
     super.attachmentButtonMargin,
     super.backgroundColor = dark,

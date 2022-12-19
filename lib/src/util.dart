@@ -62,7 +62,9 @@ String getVerboseDateTimeRepresentation(
 }) {
   final formattedDate = dateFormat != null
       ? dateFormat.format(dateTime)
-      : DateFormat.MMMd(dateLocale).format(dateTime);
+      : DateTime.now().difference(dateTime).inDays > 365
+          ? DateFormat.yMMMd(dateLocale).format(dateTime)
+          : DateFormat.MMMd(dateLocale).format(dateTime);
   final formattedTime = timeFormat != null
       ? timeFormat.format(dateTime)
       : DateFormat.Hm(dateLocale).format(dateTime);
@@ -75,6 +77,7 @@ String getVerboseDateTimeRepresentation(
     return formattedTime;
   }
 
+  return formattedDate;
   return '$formattedDate, $formattedTime';
 }
 

@@ -3,6 +3,7 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_link_previewer/flutter_link_previewer.dart'
     show LinkPreview, regexEmail, regexLink;
 import 'package:flutter_parsed_text/flutter_parsed_text.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/emoji_enlargement_behavior.dart';
@@ -151,28 +152,46 @@ class TextMessage extends StatelessWidget {
         ? theme.sentEmojiMessageTextStyle
         : theme.receivedEmojiMessageTextStyle;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
       children: [
-        if (showName)
-          nameBuilder?.call(message.author.id) ??
-              UserName(author: message.author),
-        if (enlargeEmojis)
-          if (options.isTextSelectable)
-            SelectableText(message.text, style: emojiTextStyle)
-          else
-            Text(message.text, style: emojiTextStyle)
-        else
-          TextMessageText(
-            bodyLinkTextStyle: bodyLinkTextStyle,
-            bodyTextStyle: bodyTextStyle,
-            boldTextStyle: boldTextStyle,
-            codeTextStyle: codeTextStyle,
-            options: options,
-            text: message.text,
-          ),
+        Column(
+          crossAxisAlignment: user.id == message.author.id
+              ? CrossAxisAlignment.end
+              : CrossAxisAlignment.start,
+          children: [
+            if (showName)
+              nameBuilder?.call(message.author.id) ??
+                  UserName(author: message.author),
+            if (enlargeEmojis)
+              if (options.isTextSelectable)
+                SelectableText(message.text, style: emojiTextStyle)
+              else
+                Text(message.text, style: emojiTextStyle)
+            else
+              TextMessageText(
+                bodyLinkTextStyle: bodyLinkTextStyle,
+                bodyTextStyle: bodyTextStyle,
+                boldTextStyle: boldTextStyle,
+                codeTextStyle: codeTextStyle,
+                options: options,
+                text: message.text,
+              ),
+            if (message.createdAt != null) const SizedBox(height: 5),
+            if (message.createdAt != null)
+              Text(
+                _formatDate(message.createdAt!),
+                style: theme.dateTimeTextStyle,
+              ),
+          ],
+        ),
       ],
     );
+  }
+
+  String _formatDate(int dateTime) {
+    final format = DateFormat('HH:mm');
+    final date = format.format(DateTime.fromMillisecondsSinceEpoch(dateTime));
+    return date;
   }
 }
 

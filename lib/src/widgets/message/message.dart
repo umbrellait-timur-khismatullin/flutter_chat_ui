@@ -199,16 +199,16 @@ class Message extends StatelessWidget {
             topEnd: Radius.circular(messageBorderRadius),
             topStart: Radius.circular(messageBorderRadius),
           )
-        : BorderRadius.only(
-            bottomLeft: Radius.circular(
-              currentUserIsAuthor || roundBorder ? messageBorderRadius : 0,
-            ),
-            bottomRight: Radius.circular(
-              !currentUserIsAuthor || roundBorder ? messageBorderRadius : 0,
-            ),
-            topLeft: Radius.circular(messageBorderRadius),
-            topRight: Radius.circular(messageBorderRadius),
-          );
+        : BorderRadius.all(Radius.circular(messageBorderRadius));
+    //   bottomLeft: Radius.circular(
+    //     currentUserIsAuthor || roundBorder ? messageBorderRadius : 0,
+    //   ),
+    //   bottomRight: Radius.circular(
+    //     !currentUserIsAuthor || roundBorder ? messageBorderRadius : 0,
+    //   ),
+    //   topLeft: Radius.circular(messageBorderRadius),
+    //   topRight: Radius.circular(messageBorderRadius),
+    // );
 
     return Container(
       alignment: bubbleRtlAlignment == BubbleRtlAlignment.left
@@ -318,6 +318,9 @@ class Message extends StatelessWidget {
               ? _messageBuilder()
               : Container(
                   decoration: BoxDecoration(
+                    border: Border.all(
+                      color: InheritedChatTheme.of(context).theme.borderColor,
+                    ),
                     borderRadius: borderRadius,
                     color: !currentUserIsAuthor ||
                             message.type == types.MessageType.image
