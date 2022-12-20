@@ -25,6 +25,7 @@ dependencies:
   url_launcher: ^6.1.6
   visibility_detector: ^0.3.3
   badges: ^2.0.3
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   dart_code_metrics: ^4.21.3

@@ -97,6 +97,7 @@ class Chat extends StatefulWidget {
     this.userAgent,
     this.useTopSafeAreaInset,
     this.videoMessageBuilder,
+    this.spacerHeight,
   });
 
   /// See [Message.audioMessageBuilder].
@@ -326,6 +327,8 @@ class Chat extends StatefulWidget {
 
   final List<File>? attachments;
 
+  final double? spacerHeight;
+
   @override
   State<Chat> createState() => ChatState();
 }
@@ -463,6 +466,7 @@ class ChatState extends State<Chat> {
                       ),
                       widget.customBottomWidget ??
                           Input(
+                            key: widget.key,
                             attachments: widget.attachments,
                             isAttachmentUploading: widget.isAttachmentUploading,
                             onAttachmentPressed: widget.onAttachmentPressed,
@@ -533,7 +537,7 @@ class ChatState extends State<Chat> {
           );
     } else if (object is MessageSpacer) {
       return SizedBox(
-        height: object.height,
+        height: widget.spacerHeight ?? object.height,
       );
     } else if (object is UnreadHeaderData) {
       return AutoScrollTag(

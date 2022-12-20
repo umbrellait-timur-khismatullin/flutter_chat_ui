@@ -71,11 +71,11 @@ String getVerboseDateTimeRepresentation(
   final localDateTime = dateTime.toLocal();
   final now = DateTime.now();
 
-  if (localDateTime.day == now.day &&
-      localDateTime.month == now.month &&
-      localDateTime.year == now.year) {
-    return formattedTime;
-  }
+  // if (localDateTime.day == now.day &&
+  //     localDateTime.month == now.month &&
+  //     localDateTime.year == now.year) {
+  //   return formattedTime;
+  // }
 
   return formattedDate;
   return '$formattedDate, $formattedTime';

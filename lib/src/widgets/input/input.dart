@@ -167,6 +167,7 @@ class _InputState extends State<Input> {
       child: Padding(
         padding: InheritedChatTheme.of(context).theme.inputMargin,
         child: Container(
+          height: 50,
           decoration:
               InheritedChatTheme.of(context).theme.inputContainerDecoration,
           // padding: safeAreaInsets,
@@ -181,45 +182,41 @@ class _InputState extends State<Input> {
                   padding: buttonPadding,
                 ),
               Expanded(
-                child: Padding(
-                  padding: textPadding,
-                  child: TextField(
-                    controller: _textController,
-                    cursorColor: InheritedChatTheme.of(context)
-                        .theme
-                        .inputTextCursorColor,
-                    decoration: InheritedChatTheme.of(context)
-                        .theme
-                        .inputTextDecoration
-                        .copyWith(
-                          hintStyle: InheritedChatTheme.of(context)
-                              .theme
-                              .inputTextStyle
-                              .copyWith(
-                                color: InheritedChatTheme.of(context)
-                                    .theme
-                                    .inputTextColor
-                                    .withOpacity(0.5),
-                              ),
-                          hintText:
-                              InheritedL10n.of(context).l10n.inputPlaceholder,
-                        ),
-                    focusNode: _inputFocusNode,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: 5,
-                    minLines: 1,
-                    onChanged: widget.options.onTextChanged,
-                    onTap: widget.options.onTextFieldTap,
-                    style: InheritedChatTheme.of(context)
-                        .theme
-                        .inputTextStyle
-                        .copyWith(
-                          color: InheritedChatTheme.of(context)
-                              .theme
-                              .inputTextColor,
-                        ),
-                    textCapitalization: TextCapitalization.sentences,
-                  ),
+                child: TextField(
+                  enabled: widget.options.enableInput,
+                  controller: _textController,
+                  cursorColor:
+                      InheritedChatTheme.of(context).theme.inputTextCursorColor,
+                  decoration: InheritedChatTheme.of(context)
+                      .theme
+                      .inputTextDecoration
+                      .copyWith(
+                        hintStyle: InheritedChatTheme.of(context)
+                            .theme
+                            .inputTextStyle
+                            .copyWith(
+                              color: InheritedChatTheme.of(context)
+                                  .theme
+                                  .inputTextColor
+                                  .withOpacity(0.5),
+                            ),
+                        hintText:
+                            InheritedL10n.of(context).l10n.inputPlaceholder,
+                      ),
+                  focusNode: _inputFocusNode,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 5,
+                  minLines: 1,
+                  onChanged: widget.options.onTextChanged,
+                  onTap: widget.options.onTextFieldTap,
+                  style: InheritedChatTheme.of(context)
+                      .theme
+                      .inputTextStyle
+                      .copyWith(
+                        color:
+                            InheritedChatTheme.of(context).theme.inputTextColor,
+                      ),
+                  textCapitalization: TextCapitalization.sentences,
                 ),
               ),
               ConstrainedBox(
@@ -250,6 +247,7 @@ class InputOptions {
     this.onTextFieldTap,
     this.sendButtonVisibilityMode = SendButtonVisibilityMode.editing,
     this.textEditingController,
+    this.enableInput = true,
   });
 
   /// Controls the [Input] clear behavior. Defaults to [InputClearMode.always].
@@ -273,4 +271,6 @@ class InputOptions {
   /// you can create your own [InputTextFieldController] (imported from this lib)
   /// and pass it here.
   final TextEditingController? textEditingController;
+
+  final bool? enableInput;
 }

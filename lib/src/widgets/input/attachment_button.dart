@@ -63,7 +63,7 @@ class AttachmentButton extends StatelessWidget {
                         package: 'flutter_chat_ui',
                       ),
               onPressed: isLoading ? null : onPressed,
-              padding: padding,
+              // padding: padding,
               splashRadius: 24,
               tooltip: InheritedL10n.of(context)
                   .l10n
