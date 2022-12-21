@@ -153,7 +153,7 @@ class ChatL10nRu extends ChatL10n {
   /// which extends [ChatL10n]
   const ChatL10nRu({
     super.attachmentButtonAccessibilityLabel = 'Отправить медиа',
-    super.emptyChatPlaceholder = 'Пока что у вас нет сообщений',
+    super.emptyChatPlaceholder = 'Пока что у Вас нет сообщений',
     super.fileButtonAccessibilityLabel = 'Файл',
     super.inputPlaceholder = 'Введите сообщение',
     super.sendButtonAccessibilityLabel = 'Отправить',

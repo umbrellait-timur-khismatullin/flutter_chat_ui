@@ -32,12 +32,7 @@ class AttachmentButton extends StatelessWidget {
           Container(
             margin:
                 InheritedChatTheme.of(context).theme.attachmentButtonMargin ??
-                    const EdgeInsetsDirectional.fromSTEB(
-                      8,
-                      0,
-                      0,
-                      0,
-                    ),
+                    const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
             child: IconButton(
               constraints: const BoxConstraints(
                 minHeight: 24,
@@ -51,7 +46,9 @@ class AttachmentButton extends StatelessWidget {
                         backgroundColor: Colors.transparent,
                         strokeWidth: 1.5,
                         valueColor: AlwaysStoppedAnimation<Color>(
-                          InheritedChatTheme.of(context).theme.inputTextColor,
+                          InheritedChatTheme.of(context)
+                              .theme
+                              .attachmentBadgeColor,
                         ),
                       ),
                     )

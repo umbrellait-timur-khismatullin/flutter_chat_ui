@@ -57,6 +57,7 @@ abstract class ChatTheme {
   /// Creates a new chat theme based on provided colors and text styles.
   const ChatTheme({
     required this.borderColor,
+    required this.imageBackGroundGradient,
     required this.attachmentBadgeColor,
     required this.attachmentBadgeBorderSide,
     required this.attachmentBadgeTextStyle,
@@ -312,6 +313,8 @@ abstract class ChatTheme {
   final BorderSide? attachmentBadgeBorderSide;
 
   final TextStyle attachmentBadgeTextStyle;
+
+  final Gradient? imageBackGroundGradient;
 }
 
 /// Default chat theme which extends [ChatTheme].
@@ -322,6 +325,7 @@ class DefaultChatTheme extends ChatTheme {
   /// which extends [ChatTheme]
   const DefaultChatTheme({
     super.borderColor = primary,
+    super.imageBackGroundGradient,
     super.attachmentBadgeColor = primary,
     super.sendBackgroundColor = Colors.transparent,
     super.attachmentBadgeBorderSide,
@@ -512,6 +516,7 @@ class DarkChatTheme extends ChatTheme {
   /// override only a couple of properties, otherwise create a new class
   /// which extends [ChatTheme]
   const DarkChatTheme({
+    super.imageBackGroundGradient,
     super.borderColor = primary,
     super.attachmentBadgeColor = primary,
     super.attachmentBadgeTextStyle = const TextStyle(

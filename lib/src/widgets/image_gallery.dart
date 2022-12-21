@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'state/inherited_chat_theme.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 import '../conditional/conditional.dart';
@@ -42,6 +43,11 @@ class ImageGallery extends StatelessWidget {
           child: Stack(
             children: [
               PhotoViewGallery.builder(
+                backgroundDecoration: BoxDecoration(
+                  gradient: InheritedChatTheme.of(context)
+                      .theme
+                      .imageBackGroundGradient,
+                ),
                 builder: (BuildContext context, int index) =>
                     PhotoViewGalleryPageOptions(
                   imageProvider: Conditional().getProvider(
@@ -60,10 +66,25 @@ class ImageGallery extends StatelessWidget {
               Positioned.directional(
                 end: 16,
                 textDirection: Directionality.of(context),
-                top: 56,
-                child: CloseButton(
-                  color: Colors.white,
-                  onPressed: onClosePressed,
+                top: 16,
+                child: Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: InheritedChatTheme.of(context)
+                        .theme
+                        .attachmentBadgeColor
+                        .withOpacity(0.8),
+                    shape: BoxShape.circle,
+                  ),
+                  child: GestureDetector(
+                    onTap: onClosePressed,
+                    child: const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                  ),
                 ),
               ),
             ],
