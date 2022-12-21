@@ -167,7 +167,6 @@ class _InputState extends State<Input> {
       child: Padding(
         padding: InheritedChatTheme.of(context).theme.inputMargin,
         child: Container(
-          height: 50,
           decoration:
               InheritedChatTheme.of(context).theme.inputContainerDecoration,
           // padding: safeAreaInsets,
