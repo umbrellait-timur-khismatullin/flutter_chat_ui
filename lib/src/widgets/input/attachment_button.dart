@@ -24,7 +24,7 @@ class AttachmentButton extends StatelessWidget {
   /// Padding around the button.
   final EdgeInsets padding;
 
-  final int count;
+  final int? count;
 
   @override
   Widget build(BuildContext context) => Stack(
@@ -72,10 +72,22 @@ class AttachmentButton extends StatelessWidget {
           ),
           if (count != 0)
             Positioned(
-              right: 11,
-              top: 12,
+              right: 3,
+              top: 3,
               child: Badge(
-                badgeContent: Text('$count', style: InheritedChatTheme.of(context).theme.dateTimeTextStyle,),
+                padding: const EdgeInsets.all(6),
+                badgeContent: Text(
+                  '$count',
+                  style: InheritedChatTheme.of(context)
+                      .theme
+                      .attachmentBadgeTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+                elevation: 0,
+                borderSide: InheritedChatTheme.of(context)
+                        .theme
+                        .attachmentBadgeBorderSide ??
+                    BorderSide.none,
                 badgeColor:
                     InheritedChatTheme.of(context).theme.attachmentBadgeColor,
               ),

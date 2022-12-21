@@ -18,7 +18,7 @@ import 'send_button.dart';
 class Input extends StatefulWidget {
   /// Creates [Input] widget.
   const Input({
-    this.attachments,
+    this.attachmentBadgeCount,
     super.key,
     this.isAttachmentUploading,
     this.onAttachmentPressed,
@@ -42,7 +42,7 @@ class Input extends StatefulWidget {
   /// Customisation options for the [Input].
   final InputOptions options;
 
-  final List<File>? attachments;
+  final int? attachmentBadgeCount;
 
   @override
   State<Input> createState() => _InputState();
@@ -176,7 +176,7 @@ class _InputState extends State<Input> {
             children: [
               if (widget.onAttachmentPressed != null)
                 AttachmentButton(
-                  count: widget.attachments?.length ?? 0,
+                  count: widget.attachmentBadgeCount,
                   isLoading: widget.isAttachmentUploading ?? false,
                   onPressed: widget.onAttachmentPressed,
                   padding: buttonPadding,

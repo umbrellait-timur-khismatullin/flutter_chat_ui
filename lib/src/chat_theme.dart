@@ -58,6 +58,8 @@ abstract class ChatTheme {
   const ChatTheme({
     required this.borderColor,
     required this.attachmentBadgeColor,
+    required this.attachmentBadgeBorderSide,
+    required this.attachmentBadgeTextStyle,
     required this.dateTimeTextStyle,
     required this.inputHintTextStyle,
     required this.sendBackgroundColor,
@@ -306,6 +308,10 @@ abstract class ChatTheme {
   final TextStyle dateTimeTextStyle;
 
   final TextStyle inputHintTextStyle;
+
+  final BorderSide? attachmentBadgeBorderSide;
+
+  final TextStyle attachmentBadgeTextStyle;
 }
 
 /// Default chat theme which extends [ChatTheme].
@@ -318,7 +324,14 @@ class DefaultChatTheme extends ChatTheme {
     super.borderColor = primary,
     super.attachmentBadgeColor = primary,
     super.sendBackgroundColor = Colors.transparent,
+    super.attachmentBadgeBorderSide,
     super.dateTimeTextStyle = const TextStyle(
+      color: neutral2,
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      height: 1.333,
+    ),
+    super.attachmentBadgeTextStyle = const TextStyle(
       color: neutral2,
       fontSize: 12,
       fontWeight: FontWeight.w500,
@@ -501,6 +514,13 @@ class DarkChatTheme extends ChatTheme {
   const DarkChatTheme({
     super.borderColor = primary,
     super.attachmentBadgeColor = primary,
+    super.attachmentBadgeTextStyle = const TextStyle(
+      color: neutral2,
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      height: 1.333,
+    ),
+    super.attachmentBadgeBorderSide,
     super.sendBackgroundColor = Colors.transparent,
     super.dateTimeTextStyle = const TextStyle(
       color: neutral2,

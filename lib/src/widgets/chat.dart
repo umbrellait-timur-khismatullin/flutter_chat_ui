@@ -34,7 +34,7 @@ class Chat extends StatefulWidget {
   /// Creates a chat widget.
   const Chat({
     super.key,
-    this.attachments,
+    this.attachmentBadgeCount = 0,
     this.audioMessageBuilder,
     this.avatarBuilder,
     this.bubbleBuilder,
@@ -325,7 +325,7 @@ class Chat extends StatefulWidget {
   final Widget Function(types.VideoMessage, {required int messageWidth})?
       videoMessageBuilder;
 
-  final List<File>? attachments;
+  final int? attachmentBadgeCount;
 
   final double? spacerHeight;
 
@@ -467,7 +467,7 @@ class ChatState extends State<Chat> {
                       widget.customBottomWidget ??
                           Input(
                             key: widget.key,
-                            attachments: widget.attachments,
+                            attachmentBadgeCount: widget.attachmentBadgeCount,
                             isAttachmentUploading: widget.isAttachmentUploading,
                             onAttachmentPressed: widget.onAttachmentPressed,
                             onSendPressed: widget.onSendPressed,
