@@ -194,6 +194,7 @@ class _ImageMessageState extends State<ImageMessage> {
                 .theme
                 .attachmentBadgeTextStyle
                 .color;
+            final configuration = createLocalImageConfiguration(context);
             await Fluttertoast.showToast(
               msg: 'Сохранено в галерею',
               backgroundColor: toastColor,
@@ -203,7 +204,7 @@ class _ImageMessageState extends State<ImageMessage> {
               toastLength: Toast.LENGTH_LONG,
             );
             await [Permission.storage].request();
-            _image!.obtainKey(createLocalImageConfiguration(context)).then(
+            await _image!.obtainKey(configuration).then(
               (value) {
                 _image!.load(
                   value,
@@ -213,14 +214,12 @@ class _ImageMessageState extends State<ImageMessage> {
                     cacheHeight = 200,
                     cacheWidth = 200,
                   }) async {
-                    print(widget.message.uri.split('/').last);
                     final uint8List = bytes.buffer.asUint8List();
                     await ImageGallerySaver.saveImage(
                       uint8List,
                       quality: 99,
                       name:  widget.message.name,
                     );
-                    print('saved');
                     return instantiateImageCodec(uint8List);
                   },
                 );
