@@ -56,6 +56,7 @@ const secondaryDark = Color(0xff2b2250);
 abstract class ChatTheme {
   /// Creates a new chat theme based on provided colors and text styles.
   const ChatTheme({
+    required this.imageSaveIcon,
     required this.borderColor,
     required this.imageBackGroundGradient,
     required this.attachmentBadgeColor,
@@ -315,6 +316,8 @@ abstract class ChatTheme {
   final TextStyle attachmentBadgeTextStyle;
 
   final Gradient? imageBackGroundGradient;
+
+  final Widget? imageSaveIcon;
 }
 
 /// Default chat theme which extends [ChatTheme].
@@ -324,6 +327,7 @@ class DefaultChatTheme extends ChatTheme {
   /// override only a couple of properties, otherwise create a new class
   /// which extends [ChatTheme]
   const DefaultChatTheme({
+    super.imageSaveIcon,
     super.borderColor = primary,
     super.imageBackGroundGradient,
     super.attachmentBadgeColor = primary,
@@ -516,6 +520,7 @@ class DarkChatTheme extends ChatTheme {
   /// override only a couple of properties, otherwise create a new class
   /// which extends [ChatTheme]
   const DarkChatTheme({
+    super.imageSaveIcon,
     super.imageBackGroundGradient,
     super.borderColor = primary,
     super.attachmentBadgeColor = primary,
