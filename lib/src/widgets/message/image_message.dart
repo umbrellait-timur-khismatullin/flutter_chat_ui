@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../conditional/conditional.dart';
 import '../../util.dart';
@@ -186,14 +187,14 @@ class _ImageMessageState extends State<ImageMessage> {
         top: 10,
         right: 10,
         child: GestureDetector(
-          onTap: () {
+          onTap: () async {
             final toastColor =
                 InheritedChatTheme.of(context).theme.attachmentBadgeColor;
             final toastTextColor = InheritedChatTheme.of(context)
                 .theme
                 .attachmentBadgeTextStyle
                 .color;
-            Fluttertoast.showToast(
+            await Fluttertoast.showToast(
               msg: 'Сохранено в галерею',
               backgroundColor: toastColor,
               textColor: toastTextColor,
@@ -201,6 +202,7 @@ class _ImageMessageState extends State<ImageMessage> {
               gravity: Platform.isIOS ? ToastGravity.TOP : ToastGravity.BOTTOM,
               toastLength: Toast.LENGTH_LONG,
             );
+            await [Permission.storage].request();
             _image!.obtainKey(createLocalImageConfiguration(context)).then(
               (value) {
                 _image!.load(
@@ -211,12 +213,14 @@ class _ImageMessageState extends State<ImageMessage> {
                     cacheHeight = 200,
                     cacheWidth = 200,
                   }) async {
+                    print(widget.message.uri.split('/').last);
                     final uint8List = bytes.buffer.asUint8List();
                     await ImageGallerySaver.saveImage(
                       uint8List,
                       quality: 99,
-                      name: widget.message.uri.split('/').last,
+                      name:  widget.message.name,
                     );
+                    print('saved');
                     return instantiateImageCodec(uint8List);
                   },
                 );
