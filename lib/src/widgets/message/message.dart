@@ -227,7 +227,7 @@ class Message extends StatelessWidget {
           : EdgeInsets.only(
               bottom: 4,
               left: 20 + (isMobile ? query.padding.left : 0),
-              right: isMobile ? query.padding.right : 0,
+              right: 4,
             ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
