@@ -60,11 +60,13 @@ String getVerboseDateTimeRepresentation(
   String? dateLocale,
   DateFormat? timeFormat,
 }) {
-  final formattedDate = dateFormat != null
-      ? dateFormat.format(dateTime)
-      : DateTime.now().difference(dateTime).inDays > 365
-          ? DateFormat.yMMMd(dateLocale).format(dateTime)
-          : DateFormat.MMMd(dateLocale).format(dateTime);
+  final formattedDate = DateTime.now().difference(dateTime).inDays < 1
+      ? 'Сегодня'
+      : dateFormat != null
+          ? dateFormat.format(dateTime)
+          : DateTime.now().difference(dateTime).inDays > 365
+              ? DateFormat.yMMMd(dateLocale).format(dateTime)
+              : DateFormat.MMMd(dateLocale).format(dateTime);
   final formattedTime = timeFormat != null
       ? timeFormat.format(dateTime)
       : DateFormat.Hm(dateLocale).format(dateTime);
@@ -78,7 +80,8 @@ String getVerboseDateTimeRepresentation(
   // }
 
   return formattedDate;
-  return '$formattedDate, $formattedTime';
+  // return '$formattedDate, $
+  // formattedTime;
 }
 
 /// Returns whether the [message] consists of a single emoji or multiple emojis
