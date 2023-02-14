@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_link_previewer/flutter_link_previewer.dart'
     show LinkPreview, regexEmail, regexLink;
 import 'package:flutter_parsed_text/flutter_parsed_text.dart';
@@ -26,6 +27,7 @@ class TextMessage extends StatelessWidget {
     this.options = const TextMessageOptions(),
     required this.showName,
     required this.usePreviewData,
+    required this.currentUserIsAuthor,
     this.userAgent,
   });
 
@@ -57,6 +59,8 @@ class TextMessage extends StatelessWidget {
 
   /// User agent to fetch preview data with.
   final String? userAgent;
+
+  final bool currentUserIsAuthor;
 
   @override
   Widget build(BuildContext context) {
@@ -178,9 +182,17 @@ class TextMessage extends StatelessWidget {
               ),
             if (message.createdAt != null) const SizedBox(height: 5),
             if (message.createdAt != null)
-              Text(
-                _formatDate(message.createdAt!),
-                style: theme.dateTimeTextStyle,
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    _formatDate(message.createdAt!),
+                    style: theme.dateTimeTextStyle,
+                  ),
+                  if (currentUserIsAuthor) const SizedBox(width: 2),
+                  if (currentUserIsAuthor)
+                    MessageStatus(status: message.status),
+                ],
               ),
           ],
         ),

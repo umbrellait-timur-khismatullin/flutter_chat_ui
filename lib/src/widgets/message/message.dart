@@ -273,20 +273,20 @@ class Message extends StatelessWidget {
               ],
             ),
           ),
-          if (currentUserIsAuthor)
-            Padding(
-              padding: InheritedChatTheme.of(context).theme.statusIconPadding,
-              child: showStatus
-                  ? GestureDetector(
-                      onLongPress: () =>
-                          onMessageStatusLongPress?.call(context, message),
-                      onTap: () => onMessageStatusTap?.call(context, message),
-                      child: customStatusBuilder != null
-                          ? customStatusBuilder!(message, context: context)
-                          : MessageStatus(status: message.status),
-                    )
-                  : null,
-            ),
+          // if (currentUserIsAuthor)
+          //   Padding(
+          //     padding: InheritedChatTheme.of(context).theme.statusIconPadding,
+          //     child: showStatus
+          //         ? GestureDetector(
+          //             onLongPress: () =>
+          //                 onMessageStatusLongPress?.call(context, message),
+          //             onTap: () => onMessageStatusTap?.call(context, message),
+          //             child: customStatusBuilder != null
+          //                 ? customStatusBuilder!(message, context: context)
+          //                 : MessageStatus(status: message.status),
+          //           )
+          //         : null,
+          //   ),
         ],
       ),
     );
@@ -310,12 +310,12 @@ class Message extends StatelessWidget {
   ) =>
       bubbleBuilder != null
           ? bubbleBuilder!(
-              _messageBuilder(),
+              _messageBuilder(currentUserIsAuthor),
               message: message,
               nextMessageInGroup: roundBorder,
             )
           : enlargeEmojis && hideBackgroundOnEmojiMessages
-              ? _messageBuilder()
+              ? _messageBuilder(currentUserIsAuthor)
               : Container(
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -329,11 +329,11 @@ class Message extends StatelessWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: borderRadius,
-                    child: _messageBuilder(),
+                    child: _messageBuilder(currentUserIsAuthor),
                   ),
                 );
 
-  Widget _messageBuilder() {
+  Widget _messageBuilder(bool currentUserIsAuthor) {
     switch (message.type) {
       case types.MessageType.audio:
         final audioMessage = message as types.AudioMessage;
@@ -377,6 +377,7 @@ class Message extends StatelessWidget {
                 showName: showName,
                 usePreviewData: usePreviewData,
                 userAgent: userAgent,
+                currentUserIsAuthor: currentUserIsAuthor,
               );
       case types.MessageType.video:
         final videoMessage = message as types.VideoMessage;

@@ -20,7 +20,7 @@ dependencies:
   flutter_chat_types: ^3.6.0
   flutter_link_previewer: ^3.2.0
   flutter_parsed_text: ^2.2.1
-  fluttertoast: ^8.1.2
+  fluttertoast: 8.1.2
   image_gallery_saver: ^1.7.1
   intl: ^0.17.0
   meta: ^1.8.0
