@@ -16,7 +16,6 @@ class MessageStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     switch (status) {
       case types.Status.delivered:
       case types.Status.sent:

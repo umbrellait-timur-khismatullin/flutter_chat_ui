@@ -227,7 +227,7 @@ class Message extends StatelessWidget {
           : EdgeInsets.only(
               bottom: 4,
               left: 20 + (isMobile ? query.padding.left : 0),
-              right: 4,
+              right: 20,
             ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -273,20 +273,6 @@ class Message extends StatelessWidget {
               ],
             ),
           ),
-          // if (currentUserIsAuthor)
-          //   Padding(
-          //     padding: InheritedChatTheme.of(context).theme.statusIconPadding,
-          //     child: showStatus
-          //         ? GestureDetector(
-          //             onLongPress: () =>
-          //                 onMessageStatusLongPress?.call(context, message),
-          //             onTap: () => onMessageStatusTap?.call(context, message),
-          //             child: customStatusBuilder != null
-          //                 ? customStatusBuilder!(message, context: context)
-          //                 : MessageStatus(status: message.status),
-          //           )
-          //         : null,
-          //   ),
         ],
       ),
     );
@@ -378,6 +364,7 @@ class Message extends StatelessWidget {
                 usePreviewData: usePreviewData,
                 userAgent: userAgent,
                 currentUserIsAuthor: currentUserIsAuthor,
+                showStatus: showStatus,
               );
       case types.MessageType.video:
         final videoMessage = message as types.VideoMessage;

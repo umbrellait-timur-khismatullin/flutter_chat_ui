@@ -28,6 +28,7 @@ class TextMessage extends StatelessWidget {
     required this.showName,
     required this.usePreviewData,
     required this.currentUserIsAuthor,
+    required this.showStatus,
     this.userAgent,
   });
 
@@ -61,6 +62,8 @@ class TextMessage extends StatelessWidget {
   final String? userAgent;
 
   final bool currentUserIsAuthor;
+
+  final bool showStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -189,8 +192,9 @@ class TextMessage extends StatelessWidget {
                     _formatDate(message.createdAt!),
                     style: theme.dateTimeTextStyle,
                   ),
-                  if (currentUserIsAuthor) const SizedBox(width: 2),
-                  if (currentUserIsAuthor)
+                  if (currentUserIsAuthor && showStatus)
+                    const SizedBox(width: 2),
+                  if (currentUserIsAuthor && showStatus)
                     MessageStatus(status: message.status),
                 ],
               ),
