@@ -1,5 +1,5 @@
 import 'package:badges/badges.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Badge;
 
 import '../state/inherited_chat_theme.dart';
 import '../state/inherited_l10n.dart';
