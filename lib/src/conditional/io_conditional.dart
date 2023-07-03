@@ -19,8 +19,7 @@ class IOConditional extends BaseConditional {
     if (uri.startsWith('http')) {
       return NetworkImage(uri, headers: headers);
     } else if (uri.startsWith('data')) {
-      final base64 = uri.split('base64,').last;
-      return MemoryImage(base64Decode(base64));
+      return MemoryImage(base64Decode(uri.split('base64,').last));
     } else {
       return FileImage(File(uri));
     }
